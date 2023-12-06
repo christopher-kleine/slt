@@ -14,7 +14,6 @@ Some simple functions to work with slices. Functions in the official [slices](ht
 - `None`: Checks if no entry passes the provided function.
 - `Overlap / OverlapFunc`: Checks if two slices have overlapping entries.
 - `Reduce`: Loops all entries and returns a new value.
-- `Remove`: Removes all entries that pass the provided function.
 - `Select`: Keeps all entries that pass the provided function.
 - `Unique / UniqueFunc`: Removed duplicates from the slice.
 
