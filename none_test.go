@@ -1,6 +1,7 @@
 package slt_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/christopher-kleine/slt"
@@ -15,4 +16,13 @@ func TestNone(t *testing.T) {
 	if expected != actual {
 		t.Errorf("expected %v != actual %v", expected, actual)
 	}
+}
+
+func ExampleNone() {
+	input := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	fmt.Println(slt.None(input, numbers.Even))
+	fmt.Println(slt.None(input, numbers.Below(10, true)))
+	// Output:
+	// false
+	// false
 }

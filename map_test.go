@@ -1,6 +1,7 @@
 package slt_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/christopher-kleine/slt"
@@ -21,4 +22,18 @@ func TestMap(t *testing.T) {
 			t.Errorf("expected %v != actual %v", expected, actual)
 		}
 	}
+}
+
+func ExampleMap() {
+	input := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	toWord := func(v int) string {
+		if v%2 == 0 {
+			return "Even"
+		} else {
+			return "Odd"
+		}
+	}
+	fmt.Println(slt.Map(input, toWord))
+	// Output:
+	// [Even Odd Even Odd Even Odd Even Odd Even Odd]
 }

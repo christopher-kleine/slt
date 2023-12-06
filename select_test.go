@@ -1,9 +1,11 @@
 package slt_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/christopher-kleine/slt"
+	"github.com/christopher-kleine/slt/numbers"
 )
 
 func TestSelect(t *testing.T) {
@@ -21,4 +23,11 @@ func TestSelect(t *testing.T) {
 			t.Errorf("expected %v != actual %v", expected, actual)
 		}
 	}
+}
+
+func ExampleSelect() {
+	input := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	fmt.Println("Even Numbers:", slt.Select(input, numbers.Even))
+	// Output:
+	// Even Numbers: [0 2 4 6 8]
 }

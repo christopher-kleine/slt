@@ -1,5 +1,7 @@
 # Slice Tools
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/christopher-kleine/slt.svg)](https://pkg.go.dev/github.com/christopher-kleine/slt)
+
 Some simple functions to work with slices. Functions in the official [slices](https://pkg.go.dev/slices) are not part of this small library.
 
 **NOTE:** These implementations are *not* optimized.

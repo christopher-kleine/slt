@@ -2,6 +2,7 @@ package slt_test
 
 import (
 	"cmp"
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -37,4 +38,11 @@ func TestUniqueFunc(t *testing.T) {
 	)
 
 	assert.Equal(t, expected, actual)
+}
+
+func ExampleUnique() {
+	input := []int{0, 1, 2, 3, 4, 5, 6, 5, 1}
+	fmt.Println(slt.Unique(input))
+	// Output:
+	// [0 1 2 3 4 5 6]
 }

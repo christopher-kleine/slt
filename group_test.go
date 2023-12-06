@@ -1,6 +1,7 @@
 package slt_test
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 
@@ -61,4 +62,18 @@ func TestGroupByInt(t *testing.T) {
 
 		assert.Equal(t, have, want)
 	}
+}
+
+func ExampleGroup() {
+	input := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	toWord := func(v int) string {
+		if v%2 == 0 {
+			return "Even"
+		} else {
+			return "Odd"
+		}
+	}
+	fmt.Println(slt.Group(input, toWord))
+	// Output:
+	// map[Even:[0 2 4 6 8] Odd:[1 3 5 7 9]]
 }

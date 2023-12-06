@@ -1,6 +1,7 @@
 package slt_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/christopher-kleine/slt"
@@ -20,4 +21,16 @@ func TestOverlap(t *testing.T) {
 	if NotFound == true {
 		t.Errorf("expected %v != actual %v", false, NotFound)
 	}
+}
+
+func ExampleOverlap() {
+	ListA := []int{1, 2, 3}
+	ListB := []int{1, 5, 7}
+	ListC := []int{5, 7, 9}
+
+	fmt.Println(slt.Overlap(ListA, ListB))
+	fmt.Println(slt.Overlap(ListA, ListC))
+	// Output:
+	// true
+	// false
 }
