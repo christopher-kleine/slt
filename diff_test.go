@@ -13,5 +13,5 @@ func ExampleDiff() {
 
 	fmt.Println(diff)
 	// Output:
-	// [G F]
+	// [C D G F]
 }
