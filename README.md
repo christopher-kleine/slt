@@ -29,3 +29,122 @@ Aside from that there are some functions for numbers:
 - `Greater`: Check if a Number is greater than a certain value. [Curried Function]
 - `Less`: Check if a Number is below a certain value. [Curried Function]
 - `Odd`: Check if an Integer is NOT dividable by 2.
+
+## Examples
+
+For the sake of keeping things short, the following code is assumed in all cases:
+
+```go
+type Person struct {
+    Name string
+    Age  int
+}
+
+type Hero struct {
+    Name     string
+    Universe string
+}
+
+func isMinor(person Person) bool {
+    return person.Age < 18
+}
+
+var (
+    viewers = []Person{
+        { Name: "Chris", Age: 38 },
+        { Name: "Danny", Age: 21 },
+        { Name: "Betty", Age: 30 },
+        { Name: "Karen", Age: 55 },
+        { Name: "Peter", Age: 17 },
+    }
+
+    roomA = []string{
+        "Betty", "Chris", "Danny", "Peter",
+    }
+
+    roomB = []string{
+        "Betty", "Danny", "Karen", "Peter",
+    }
+
+    heroes = []Hero{
+        { Name: "Batman", Universe: "DC" },
+        { Name: "Captain America", Universe: "Marvel" },
+        { Name: "Flash", Universe: "DC" },
+        { Name: "Hulk", Universe: "Marvel" },
+        { Name: "Iron Man", Universe: "Marvel" },
+        { Name: "Robin", Universe "DC" },
+        { Name: "Superman", Universe: "DC" },
+        { Name: "Thor", Universe: "Marvel" },
+    }
+)
+```
+
+
+### All / Every
+
+The function "All" loops through all entries of a given slice and executes the provided callback on every element. That is, until the callback returns false or there are no more entries to check.
+
+The function "Every" is simply an alias to "All" and works the same way.
+
+```go
+func main() {
+    // This returns false right at the first entry "Chris"
+    if slt.All(viewers, isMinor) == false {
+        fmt.Println("Not all viewers are minors!")
+    }
+}
+```
+
+### Any / Some
+
+The function "Any" loops through all entries of a given slice and executes the provided callback on every element. That is, until the callback returns true or there are no more entries to check.
+
+The function "Some" is simply an alias to "Any" and works the same way.
+
+```go
+func main() {
+    // This returns true at the last entry "Peter".
+    if slt.Any(viewers, isMinor) == false {
+        fmt.Println("At least one viewer is a minor!")
+    }
+}
+```
+
+### Count
+
+The function "Count" loops through all entries of a given slice and executes the provided callback on every element. It counts all entries that return true.
+
+```go
+func main() {
+    fmt.Printf("There are %d minor viewers.", slt.Count(viewers, isMinor))
+}
+```
+
+### Diff
+
+The function "Diff" takes two slices of the same type and returns the elements that appear only in one of the slices.
+
+```go
+func main() {
+    fmt.Println(slt.Diff(roomA, roomB))
+    // Prints the names:
+    // - Chris
+    // - Karen
+}
+```
+
+### Group
+
+The function "Group" creates a map based on the result of the callback. This can be used to group a slice into multiple sub-slices.
+
+```go
+func main() {
+    byUniverse := func(hero Hero) string {
+        return hero.Universe
+    }
+
+    ordered := slt.GroupBy(heroes, byUniverse)
+    // Result:
+    // 
+}
+```
