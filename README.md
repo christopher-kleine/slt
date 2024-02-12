@@ -18,7 +18,8 @@ Some simple functions to work with slices. Functions in the official [slices](ht
 - `None`: Checks if no entry passes the provided function.
 - `Overlap / OverlapFunc`: Checks if two slices have overlapping entries.
 - `Reduce`: Loops all entries and returns a new value.
-- `Remove`: Remove certain elements from a slice. (slices uses an index, this uses values).
+- `Reject`: Removes all entries that pass the provided function. (This is similiar to [slices.DeleteFunc](https://pkg.go.dev/slices#DeleteFunc), but it doesn't change the original slice.)
+- `Remove`: Remove certain elements from a slice. ([slices.Delete](https://pkg.go.dev/slices#Delete) uses an index, this uses values).
 - `Select`: Keeps all entries that pass the provided function.
 - `Union`: Merge all slices and remove duplicates.
 - `Unique / UniqueFunc`: Removed duplicates from the slice.
