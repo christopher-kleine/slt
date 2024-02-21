@@ -1,7 +1,7 @@
 package slt
 
-// Group uses the callback to group the provided slice into a map of slices.
-func Group[S ~[]E, E any, T comparable](s S, fn func(E) T) map[T]S {
+// GroupBy uses the callback to group the provided slice into a map of slices.
+func GroupBy[S ~[]E, E any, T comparable](s S, fn func(E) T) map[T]S {
 	result := make(map[T]S)
 
 	for _, v := range s {

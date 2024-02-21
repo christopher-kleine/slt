@@ -31,7 +31,7 @@ func TestGroupByString(t *testing.T) {
 	}
 
 	for _, testCase := range testTable {
-		have := slt.Group(testCase.values, testCase.fn)
+		have := slt.GroupBy(testCase.values, testCase.fn)
 		want := testCase.want
 
 		assert.Equal(t, have, want)
@@ -57,14 +57,14 @@ func TestGroupByInt(t *testing.T) {
 	}
 
 	for _, testCase := range testTable {
-		have := slt.Group(testCase.values, testCase.fn)
+		have := slt.GroupBy(testCase.values, testCase.fn)
 		want := testCase.want
 
 		assert.Equal(t, have, want)
 	}
 }
 
-func ExampleGroup() {
+func ExampleGroupBy() {
 	input := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	toWord := func(v int) string {
 		if v%2 == 0 {
@@ -73,7 +73,7 @@ func ExampleGroup() {
 			return "Odd"
 		}
 	}
-	fmt.Println(slt.Group(input, toWord))
+	fmt.Println(slt.GroupBy(input, toWord))
 	// Output:
 	// map[Even:[0 2 4 6 8] Odd:[1 3 5 7 9]]
 }

@@ -13,7 +13,8 @@ Some simple functions to work with slices. Functions in the official [slices](ht
 - `Count`: Counts all entries that pass the provided function.
 - `Diff`: Return the elements that are in only one of two slices.
 - `Find`: Find returns the first element that match the predicate.
-- `Group`: Creates a map of slices, grouped by the provided function.
+- `GroupBy`: Creates a map of slices, grouped by the provided function.
+- `Intersect`: Takes 2 slices and returns a new slice containing overlapping elements.
 - `Map`: Creates a new slice based on the provided function.
 - `None`: Checks if no entry passes the provided function.
 - `Overlap / OverlapFunc`: Checks if two slices have overlapping entries.
@@ -21,6 +22,7 @@ Some simple functions to work with slices. Functions in the official [slices](ht
 - `Reject`: Removes all entries that pass the provided function. (This is similiar to [slices.DeleteFunc](https://pkg.go.dev/slices#DeleteFunc), but it doesn't change the original slice.)
 - `Remove`: Remove certain elements from a slice. ([slices.Delete](https://pkg.go.dev/slices#Delete) uses an index, this uses values).
 - `Select`: Keeps all entries that pass the provided function.
+- `SplitBy`: Splits a slice into 2 parts using the provided function.
 - `Union`: Merge all slices and remove duplicates.
 - `Unique / UniqueFunc`: Removed duplicates from the slice.
 
@@ -118,7 +120,10 @@ The function "Count" loops through all entries of a given slice and executes the
 
 ```go
 func main() {
-    fmt.Printf("There are %d minor viewers.", slt.Count(viewers, isMinor))
+    fmt.Printf("There are %d minor viewer(s).", slt.Count(viewers, isMinor))
+
+    // Output:
+    // There are 1 minor viewer(s).
 }
 ```
 
@@ -129,7 +134,8 @@ The function "Diff" takes two slices of the same type and returns the elements t
 ```go
 func main() {
     fmt.Println(slt.Diff(roomA, roomB))
-    // Prints the names:
+
+    // Output:
     // - Chris
     // - Karen
 }
@@ -144,16 +150,19 @@ This functions is less useful when using primitive types. For this, the [`slices
 ```go
 func main() {
     someone, index := slt.Find(room, 0, func(person Person) bool {
-        return person.Age >= 18
+        return !isMinor(person)
     })
 
-    fmt.Printf("The first person of age in the room is %s at position %d\n", someone.Name, index)
+    fmt.Printf("The first person of age in the room is %s at position %d", someone.Name, index)
+
+    // Output:
+    // The first person of age in the room is Chris at position 0
 }
 ```
 
-### Group
+### GroupBy
 
-The function "Group" creates a map based on the result of the callback. This can be used to group a slice into multiple sub-slices.
+The function "GroupBy" creates a map based on the result of the callback. This can be used to group a slice into multiple sub-slices.
 
 ```go
 func main() {
@@ -161,8 +170,16 @@ func main() {
         return hero.Universe
     }
 
-    ordered := slt.GroupBy(heroes, byUniverse)
-    // Result:
-    // 
+    grouped := slt.GroupBy(heroes, byUniverse)
+	for universe, heroes := range grouped {
+		fmt.Printf("Universe: %v\n", universe)
+		fmt.Printf("%+v\n", heroes)
+	}
+
+    // Output:
+    // Universe: DC
+    // [{Name:Batman Universe:DC} {Name:Flash Universe:DC} {Name:Robin Universe:DC} {Name:Superman Universe:DC}]
+    // Universe: Marvel
+    // [{Name:Captain America Universe:Marvel} {Name:Hulk Universe:Marvel} {Name:Iron Man Universe:Marvel} {Name:Thor Universe:Marvel}]
 }
 ```
