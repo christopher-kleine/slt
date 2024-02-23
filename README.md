@@ -16,6 +16,7 @@ Some simple functions to work with slices. Functions in the official [slices](ht
 - `GroupBy`: Creates a map of slices, grouped by the provided function.
 - `Intersect`: Takes 2 slices and returns a new slice containing overlapping elements.
 - `Map`: Creates a new slice based on the provided function.
+- `Mode`: Calculates the mode of a slice.
 - `None`: Checks if no entry passes the provided function.
 - `Overlap / OverlapFunc`: Checks if two slices have overlapping entries.
 - `Reduce`: Loops all entries and returns a new value.
@@ -28,11 +29,16 @@ Some simple functions to work with slices. Functions in the official [slices](ht
 
 Aside from that there are some functions for numbers:
 
-- `Between`: Check if Number is between two values. [Curried Function]
-- `Even`: Check if an Integer is dividable by 2.
-- `Greater`: Check if a Number is greater than a certain value. [Curried Function]
-- `Less`: Check if a Number is below a certain value. [Curried Function]
-- `Odd`: Check if an Integer is NOT dividable by 2.
+- `Above`: Check if a Number is above a certain value. [Closure]
+- `Below`: Check if a Number is below a certain value. [Closure]
+- `Between`: Check if Number is between two values. [Closure]
+- `DividableBy`: Check if a Number is dividable by a certain value. [Closure]
+- `NotDividableBy`: Check if a Number is not dividable by a certain value. [Closure]
+- `Even`: Check if an Integer is dividable by 2. [Alias for DividableBy(2)]
+- `Odd`: Check if an Integer is NOT dividable by 2. [Alias for NotDividableBy(2)]
+- `Sum`: Calculates the sum of all entries in a numeric slice.
+- `Mean / Avg`: Calculates the mean of all entries in a numeric slice.
+- `Median`: Calculates the median of all entries in a numeric slice.
 
 ## Examples
 
