@@ -1,7 +1,7 @@
 package slt
 
 // Reduce reduces a collection using the function fn
-func Reduce[S ~[]E, E any](s S, start E, f func(acc E, curr E) E) E {
+func Reduce[S ~[]E, E any, T any](s S, start T, f func(acc T, curr E) T) T {
 	result := start
 
 	for _, e := range s {

@@ -2,6 +2,7 @@ package slt_test
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/christopher-kleine/slt"
@@ -31,4 +32,21 @@ func ExampleReduce() {
 	fmt.Println("Sum of all numbers between 1 and 10 is:", slt.Reduce(numbers, 0, add))
 	// Output:
 	// Sum of all numbers between 1 and 10 is: 55
+}
+
+func ExampleReduce2() {
+	numbers := []string{
+		"A", "b", "C", "D", "E", "f", "g", "H", "I", "J", "K", "L", "M",
+		"n", "O", "p", "q", "r", "S", "T", "U", "V", "W", "X", "Y", "Z",
+	}
+	addLower := func(acc int, curr string) int {
+		if curr == strings.ToLower(curr) {
+			return acc + 1
+		}
+
+		return acc
+	}
+	fmt.Println("Sum of all lower letters is:", slt.Reduce(numbers, 0, addLower))
+	// Output:
+	// Sum of all lower letters is: 7
 }
