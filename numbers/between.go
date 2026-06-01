@@ -13,7 +13,7 @@ package numbers
 //
 // If lessOrEqual and moreOrEqual are false, the function return true if:
 // e > min && e < max
-func Between[E Number](min E, max E, lessOrEqual, moreOrEqual bool) func(E) bool {
+func IsBetween[E Number](min E, max E, lessOrEqual, moreOrEqual bool) func(E) bool {
 	if lessOrEqual && moreOrEqual {
 		return func(e E) bool {
 			return e >= min && e <= max

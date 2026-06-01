@@ -1,13 +1,21 @@
 package numbers
 
-func Above[E Number](min E, includeEqual bool) func(E) bool {
-	if includeEqual {
-		return func(e E) bool {
-			return e >= min
-		}
-	} else {
-		return func(e E) bool {
-			return e > min
-		}
+// Above takes a min value to compare to and returns a function than compares
+// a number against this value.
+//
+// The result is e > min
+func Above[E Number](min E) func(E) bool {
+	return func(e E) bool {
+		return e > min
+	}
+}
+
+// AboveOrEqual takes a min value to compare to and returns a function than
+// compares a number against this value.
+//
+// The result is e >= min
+func AboveOrEqual[E Number](min E) func(E) bool {
+	return func(e E) bool {
+		return e >= min
 	}
 }

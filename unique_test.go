@@ -1,14 +1,16 @@
 package slt_test
 
 import (
-	"cmp"
 	"fmt"
+	"math/rand"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 
 	"github.com/christopher-kleine/slt"
 )
+
+const maxSize = 10000
 
 func TestUnique(t *testing.T) {
 	var (
@@ -31,9 +33,9 @@ func TestUniqueFunc(t *testing.T) {
 		villain  = person{Name: "Villain", Age: 30}
 		sidekick = person{Name: "Sidekick", Age: 25}
 		input    = []person{hero, villain, hero, sidekick, villain}
-		expected = []person{hero, sidekick, villain}
-		actual   = slt.UniqueFunc(input, func(a person, b person) int {
-			return cmp.Compare(a.Name, b.Name)
+		expected = []person{hero, villain, sidekick}
+		actual   = slt.UniqueFunc(input, func(a person) string {
+			return a.Name
 		})
 	)
 
@@ -45,4 +47,64 @@ func ExampleUnique() {
 	fmt.Println(slt.Unique(input))
 	// Output:
 	// [0 1 2 3 4 5 6]
+}
+
+func TestUniqueUnstable(t *testing.T) {
+	var (
+		input    = []int{0, 1, 2, 3, 4, 5, 6, 5, 1}
+		expected = []int{0, 1, 2, 3, 4, 5, 6}
+		actual   = slt.UniqueUnstable(input)
+	)
+
+	assert.ElementsMatch(t, expected, actual)
+}
+
+func BenchmarkUnique(b *testing.B) {
+	var (
+		input = []int{0, 1, 2, 3, 4, 5, 6, 5, 1}
+	)
+
+	for range b.N {
+		_ = slt.Unique(input)
+	}
+}
+
+func BenchmarkUniqueUnstable(b *testing.B) {
+	var (
+		input = []int{0, 1, 2, 3, 4, 5, 6, 5, 1}
+	)
+
+	for range b.N {
+		_ = slt.UniqueUnstable(input)
+	}
+}
+
+func generateData(n int) []int {
+	data := make([]int, n)
+	for i := 0; i < n; i++ {
+		data[i] = rand.Intn(n / 2) // intentionally many duplicates
+	}
+	return data
+}
+
+func BenchmarkUniqueSizes(b *testing.B) {
+	sizes := []int{2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192}
+
+	for _, size := range sizes {
+		b.Run(fmt.Sprintf("Stable_%d", size), func(b *testing.B) {
+			data := generateData(size)
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				_ = slt.Unique(data)
+			}
+		})
+
+		b.Run(fmt.Sprintf("Unstable_%d", size), func(b *testing.B) {
+			data := generateData(size)
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				_ = slt.UniqueUnstable(data)
+			}
+		})
+	}
 }

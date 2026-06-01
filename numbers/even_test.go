@@ -7,11 +7,11 @@ import (
 )
 
 func TestEven(t *testing.T) {
-	if numbers.Even(1) != false {
+	if numbers.IsEven(1) != false {
 		t.Errorf("expected %v != actual %v", false, true)
 	}
 
-	if numbers.Even(2) != true {
+	if numbers.IsEven(2) != true {
 		t.Errorf("expected %v != actual %v", true, false)
 	}
 }

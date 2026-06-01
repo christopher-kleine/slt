@@ -2,43 +2,83 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/christopher-kleine/slt.svg)](https://pkg.go.dev/github.com/christopher-kleine/slt)
 
-Some simple functions to work with slices. Functions in the official [slices](https://pkg.go.dev/slices) are not part of this small library.
+Some simple functions to work with slices. Functions in the official
+[slices](https://pkg.go.dev/slices) are not part of this small library.
 
-**NOTE:** These implementations are *not* optimized.
+**NOTE:** These implementations are not yet optimized.
 
-## What does this library bring to the table?
+## Packages
 
-- `All / Every`: Checks if all entries pass the provided function.
-- `Any / Some`: Checks if at least one entry passes the provided function.
-- `Count`: Counts all entries that pass the provided function.
-- `Diff`: Return the elements that are in only one of two slices.
-- `Find`: Find returns the first element that match the predicate.
-- `GroupBy`: Creates a map of slices, grouped by the provided function.
-- `Intersect`: Takes 2 slices and returns a new slice containing overlapping elements.
-- `Map`: Creates a new slice based on the provided function.
-- `Mode`: Calculates the mode of a slice.
-- `None`: Checks if no entry passes the provided function.
-- `Overlap / OverlapFunc`: Checks if two slices have overlapping entries.
-- `Reduce`: Loops all entries and returns a new value.
-- `Reject`: Removes all entries that pass the provided function. (This is similiar to [slices.DeleteFunc](https://pkg.go.dev/slices#DeleteFunc), but it doesn't change the original slice.)
-- `Remove`: Remove certain elements from a slice. ([slices.Delete](https://pkg.go.dev/slices#Delete) uses an index, this uses values).
-- `Select`: Keeps all entries that pass the provided function.
-- `SplitBy`: Splits a slice into 2 parts using the provided function.
-- `Union`: Merge all slices and remove duplicates.
-- `Unique / UniqueFunc`: Removed duplicates from the slice.
+This library contains the following:
 
-Aside from that there are some functions for numbers:
+- `github.com/christopher-kleine/slt`: The core of "slice tools". Contains some usefull functions for all types of slices.
+- `github.com/christopher-kleine/slt/numbers`: Functions especially for numbers. Mostly closures.
+- `github.com/christopher-kleine/slt/chain`: Chainable version of "slice tools" whereever possible. (TODO)
 
-- `Above`: Check if a Number is above a certain value. [Closure]
-- `Below`: Check if a Number is below a certain value. [Closure]
-- `Between`: Check if Number is between two values. [Closure]
-- `DividableBy`: Check if a Number is dividable by a certain value. [Closure]
-- `NotDividableBy`: Check if a Number is not dividable by a certain value. [Closure]
-- `Even`: Check if an Integer is dividable by 2. [Alias for DividableBy(2)]
-- `Odd`: Check if an Integer is NOT dividable by 2. [Alias for NotDividableBy(2)]
-- `Sum`: Calculates the sum of all entries in a numeric slice.
-- `Mean / Avg`: Calculates the mean of all entries in a numeric slice.
-- `Median`: Calculates the median of all entries in a numeric slice.
+## Functions in "slice tools" and how they compare to the `slices` package
+
+Highlightes functions are optimized to some degree.
+
+| Function      | Description                                                                             | Compared to `slices`                                                 |
+| ------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| All           | Checks if all entries pass the provided function.                                       | `slices.All` is an iterator                                          |
+| Any           | Checks if at least one entry passes the provided function.                              |                                                                      |
+| Chunk         | Splits a slice in equal sized chunks                                                    | `slices.Chunk` is an iterator                                        |
+| ChunkBy       | Splits a slice based on the result of the predicate                                     |                                                                      |
+| Count         | Counts all entries that pass the provided function.                                     |                                                                      |
+| Diff          | Return the elements that are in only one of two slices.                                 |                                                                      |
+| EqualValues   | Returns if two slices have the same content. Regardless of the order.                   | `slices.Equal` requires values and their index to match              |
+| Every         | *Alias for All*                                                                         |                                                                      |
+| Filter        | *Alias for Select*                                                                      |                                                                      |
+| Find          | Find returns the first element (and their index) that match the predicate.              | `slices.Index` only returns the index                                |
+| First         | Returns the first element, the rest and an error if the slice is already empty          |                                                                      |
+| Flatten       | Takes []S and returns S (S is a slice of any type)                                      |                                                                      |
+| Fold          | *Alias for Reduce*                                                                      |                                                                      |
+| FoldR         | *Alias for ReduceR*                                                                     |                                                                      |
+| GroupBy       | Creates a map of slices, grouped by the provided function.                              |                                                                      |
+| GroupCount    | Similiar to GroupBy, but returns a map with int64 instead                               |                                                                      |
+| Head          | *Alias for First*                                                                       |                                                                      |
+| IndexBy       | Similiar to GroupBy, but the resulting map has only one element                         |                                                                      |
+| Intersect     | Takes 2 slices and returns a new slice containing overlapping elements.                 |                                                                      |
+| Last          | Returns the last element, the rest and an error in case the slice is already empty      |                                                                      |
+| Map           | Creates a new slice based on the provided function. Target type can be different        |                                                                      |
+| Some          | *Alias for Any*                                                                         |                                                                      |
+| Mode          | Finds the element that appears the most                                                 |                                                                      |
+| None          | Checks if no entry passes the provided predicate                                        |                                                                      |
+| Overlap       | Checks if two slices overlap                                                            |                                                                      |
+| OverlapFunc   | Checks if two slices overlap using a predicate instead of their value                   |                                                                      |
+| Pick          | Picks N random elements from the slice and returns a new slice. Duplicates are possible |                                                                      |
+| PickUnique    | Similiar to Pick, but makes sure the elements are unique                                |                                                                      |
+| Reduce        | Reduces the slice to a single value. Target type can be different from input type       |                                                                      |
+| ReduceR       | Similiar to Reduce. But starts at the end instead                                       |                                                                      |
+| Reject        | Removes all entries that pass the provided function                                     | `slices.DeleteFunc` modifies the original slice                      |
+| Remove        | Removes all entries that match the given values                                         | `slices.Delete` uses an index, not values                            |
+| ReplaceValues | Replaces values based on a replace-map                                                  | `slices.Replace` uses a predefined range instead of values           |
+| Select        | Creates a new slice containing only the elements that pass the predicate                |                                                                      |
+| SplitBy       | Splits a slice in to parts based on the predicate                                       |                                                                      |
+| Tail          | *Alias for Last*                                                                        |                                                                      |
+| Union         | Merge all slices and remove duplicates from incoming slices                             | `slices.Concat` doesn't remove duplicate values from incoming slices |
+| **Unique**    | Removed duplicates from the slice.                                                      | `slices.Compact` only removes duplicates if they're consecutive      |
+| UniqueFunc    | Removed duplicates from the slice based on the predicate                                | The same as `Unique` but for `slices.CompactFunc`                    |
+
+
+## Functions in "numbers"
+
+| Function       | Description                                                             | Closure |
+| -------------- | ----------------------------------------------------------------------- | :-----: |
+| Above          | Check if a Number is above a certain value                              |   Yes   |
+| AboveOrEqual   | Check if a Number is above or equal to a certain value                  |   Yes   |
+| Avg            | *Alias for Mean*                                                        |   No    |
+| Below          | Check if a Number is below a certain value                              |   Yes   |
+| BelowOrEqual   | Check if a Number is below or equal to a certain value                  |   Yes   |
+| Between        | Checks if a Number is between two values                                |   Yes   |
+| DividableBy    | Check if a Number is dividable by a certain value                       |   Yes   |
+| NotDividableBy | Check if a Number is not dividable by a certain value                   |   Yes   |
+| Even           | Check if an Integer is dividable by 2 (Alias for DividableBy(2))        |   Yes   |
+| Odd            | Check if an Integer is NOT dividable by 2 (Alias for NotDividableBy(2)) |   Yes   |
+| Sum            | Calculates the sum of all entries in a numeric slice                    |   No    |
+| Mean           | Calculates the mean of all entries in a numeric slice                   |   No    |
+| Median         | Calculates the median of all entries in a numeric slice                 |   No    |
 
 ## Examples
 

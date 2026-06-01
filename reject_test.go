@@ -27,7 +27,7 @@ func TestReject(t *testing.T) {
 
 func ExampleReject() {
 	input := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-	fmt.Println("Even Numbers:", slt.Reject(input, numbers.Even))
+	fmt.Println("Even Numbers:", slt.Reject(input, numbers.IsEven))
 	// Output:
 	// Even Numbers: [1 3 5 7 9]
 }

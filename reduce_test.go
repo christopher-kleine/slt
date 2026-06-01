@@ -24,7 +24,7 @@ func TestReduce(t *testing.T) {
 	}
 }
 
-func ExampleReduce() {
+func ExampleReduce_sumOfNumbers() {
 	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	add := func(acc int, curr int) int {
 		return acc + curr
@@ -34,7 +34,7 @@ func ExampleReduce() {
 	// Sum of all numbers between 1 and 10 is: 55
 }
 
-func ExampleReduce2() {
+func ExampleReduce_sumAllLowerCaseLetters() {
 	numbers := []string{
 		"A", "b", "C", "D", "E", "f", "g", "H", "I", "J", "K", "L", "M",
 		"n", "O", "p", "q", "r", "S", "T", "U", "V", "W", "X", "Y", "Z",

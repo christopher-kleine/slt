@@ -13,7 +13,7 @@ func TestFind(t *testing.T) {
 	inputList := []int{1, 2, 3}
 
 	expected := 2
-	actual, index := slt.Find(inputList, 0, numbers.Even)
+	actual, index := slt.Find(inputList, 0, numbers.IsEven)
 	if index == -1 {
 		t.Errorf("expected index to be >=0; got %d instead", index)
 	}
