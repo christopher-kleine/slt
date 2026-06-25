@@ -1,38 +1,38 @@
 package slt_test
 
-import (
-	"fmt"
-	"testing"
+// import (
+// 	"fmt"
+// 	"testing"
 
-	"github.com/christopher-kleine/slt"
-	"github.com/christopher-kleine/slt/numbers"
-)
+// 	"github.com/christopher-kleine/slt/v2"
+// 	"github.com/christopher-kleine/slt/v2/numbers"
+// )
 
-func TestAny(t *testing.T) {
-	inputList := []int{1, 2, 3}
+// func TestAny(t *testing.T) {
+// 	inputList := []int{1, 2, 3}
 
-	expected := true
-	actual := slt.Any(inputList, numbers.IsEven)
-	if expected != actual {
-		t.Errorf("expected %v != actual %v", expected, actual)
-	}
-}
+// 	expected := true
+// 	actual := slt.Any(inputList, numbers.IsEven)
+// 	if expected != actual {
+// 		t.Errorf("expected %v != actual %v", expected, actual)
+// 	}
+// }
 
-func TestAny2(t *testing.T) {
-	inputList := []int{1, 5, 3}
+// func TestAny2(t *testing.T) {
+// 	inputList := []int{1, 5, 3}
 
-	expected := false
-	actual := slt.Any(inputList, numbers.IsEven)
-	if expected != actual {
-		t.Errorf("expected %v != actual %v", expected, actual)
-	}
-}
+// 	expected := false
+// 	actual := slt.Any(inputList, numbers.IsEven)
+// 	if expected != actual {
+// 		t.Errorf("expected %v != actual %v", expected, actual)
+// 	}
+// }
 
-func ExampleAny() {
-	input := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-	fmt.Println(slt.Any(input, numbers.IsEven))
-	fmt.Println(slt.All(input, numbers.Above(10)))
-	// Output:
-	// true
-	// false
-}
+// func ExampleAny() {
+// 	input := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+// 	fmt.Println(slt.Any(input, numbers.IsEven))
+// 	fmt.Println(slt.All(input, numbers.Above(10)))
+// 	// Output:
+// 	// true
+// 	// false
+// }

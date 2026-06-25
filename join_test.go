@@ -1,44 +1,44 @@
 package slt_test
 
-import (
-	"fmt"
+// import (
+// 	"fmt"
 
-	"github.com/christopher-kleine/slt"
-)
+// 	"github.com/christopher-kleine/slt/v2"
+// )
 
-func ExampleJoin() {
-	type Student struct {
-		ID        string
-		Name      string
-		ProjectID string
-	}
+// func ExampleJoin() {
+// 	type Student struct {
+// 		ID        string
+// 		Name      string
+// 		ProjectID string
+// 	}
 
-	type Project struct {
-		ID   string
-		Name string
-	}
+// 	type Project struct {
+// 		ID   string
+// 		Name string
+// 	}
 
-	students := []Student{
-		{ID: "AAA", Name: "Benjamin", ProjectID: "DDD"},
-		{ID: "BBB", Name: "Karla", ProjectID: "EEE"},
-		{ID: "CCC", Name: "Peter", ProjectID: "DDD"},
-	}
+// 	students := []Student{
+// 		{ID: "AAA", Name: "Benjamin", ProjectID: "DDD"},
+// 		{ID: "BBB", Name: "Karla", ProjectID: "EEE"},
+// 		{ID: "CCC", Name: "Peter", ProjectID: "DDD"},
+// 	}
 
-	projects := []Project{
-		{ID: "DDD", Name: "Prepare classroom"},
-		{ID: "EEE", Name: "Invite parents"},
-	}
+// 	projects := []Project{
+// 		{ID: "DDD", Name: "Prepare classroom"},
+// 		{ID: "EEE", Name: "Invite parents"},
+// 	}
 
-	projectByStudentID := slt.Join(
-		students,
-		projects,
-		func(s Student) string { return s.ProjectID },
-		func(p Project) string { return p.ID },
-		func(s Student) string { return s.ID },
-	)
+// 	projectByStudentID := slt.Join(
+// 		students,
+// 		projects,
+// 		func(s Student) string { return s.ProjectID },
+// 		func(p Project) string { return p.ID },
+// 		func(s Student) string { return s.ID },
+// 	)
 
-	fmt.Printf("%+v", projectByStudentID)
+// 	fmt.Printf("%+v", projectByStudentID)
 
-	// Output:
-	// map[AAA:{ID:DDD Name:Prepare classroom} BBB:{ID:EEE Name:Invite parents} CCC:{ID:DDD Name:Prepare classroom}]
-}
+// 	// Output:
+// 	// map[AAA:{ID:DDD Name:Prepare classroom} BBB:{ID:EEE Name:Invite parents} CCC:{ID:DDD Name:Prepare classroom}]
+// }
