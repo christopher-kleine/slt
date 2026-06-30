@@ -18,3 +18,41 @@ func Join[SA ~[]EA, SB ~[]EB, EA any, EB any, JoinKey comparable, ResultKey comp
 
 	return result
 }
+
+// InnerJoin takes a slice and a lookup map. It then returns
+func InnerJoin[M ~map[T]E1, S ~[]E2, T comparable, E1 any, E2 any](slice S, lookup M, fn func(E2) T) []E1 {
+	result := make([]E1, 0, len(slice))
+
+	for _, v := range slice {
+		k := fn(v)
+		if v2, ok := lookup[k]; ok {
+			result = append(result, v2)
+		}
+	}
+
+	return result
+}
+
+func LeftJoin[M ~map[T]E1, S ~[]E2, T comparable, E1 any, E2 any](slice S, lookup M, fn func(E2) T) []struct {
+	Value E1
+	OK    bool
+} {
+	result := make([]struct {
+		Value E1
+		OK    bool
+	}, len(slice))
+
+	for index, v := range slice {
+		k := fn(v)
+		v2, ok := lookup[k]
+		result[index] = struct {
+			Value E1
+			OK    bool
+		}{
+			Value: v2,
+			OK:    ok,
+		}
+	}
+
+	return result
+}
